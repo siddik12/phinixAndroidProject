@@ -31,11 +31,11 @@ public class AddProduct extends AppCompatActivity {
         String supplierName = supplierNameET.getText().toString();
 
         ProductDatabaseHelper productDatabaseHelper = new ProductDatabaseHelper(this);
-        boolean saved = productDatabaseHelper.saveProduct(new ProductDetail(productName, productId, purchasePrice, sellingPrice, puchaseDate, supplierName));
+        boolean saved = productDatabaseHelper.saveProduct(new Product(productName, productId, purchasePrice, sellingPrice, puchaseDate, supplierName));
         if (saved) {
-            Toast.makeText(this, "one product add succesfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "one product_view add successfully", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "product not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "product_view not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

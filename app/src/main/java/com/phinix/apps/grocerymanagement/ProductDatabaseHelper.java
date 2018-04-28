@@ -48,7 +48,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean saveProduct(ProductDetail product_detail) {
+    public boolean saveProduct(Product product_detail) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODUCT_COL_NAME, product_detail.getProductName());
@@ -68,14 +68,14 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<ProductDetail> getAllProducts() {
-        List<ProductDetail> productList = new ArrayList<>();
+    public List<Product> getAllProducts() {
+        List<Product> productList = new ArrayList<>();
         String sql = "Select * from " + PRODUCT_TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                ProductDetail product_detail = new ProductDetail();
+                Product product_detail = new Product();
                 product_detail.setDbPrimaryID(Integer.parseInt(cursor.getString(0)));
                 product_detail.setProductName(cursor.getString(1));
                 product_detail.setProductId(cursor.getString(2));
