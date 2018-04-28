@@ -1,8 +1,7 @@
 package com.phinix.apps.grocerymanagement;
 
 
-
-public class Product_Detail {
+public class ProductDetail {
     private int dbPrimaryID;
     private String productName;
     private String productId;
@@ -11,10 +10,10 @@ public class Product_Detail {
     private String productPurchaseDate;
     private String productSupplierName;
 
-    public Product_Detail() {
+    public ProductDetail() {
     }
 
-    public Product_Detail(String productName, String productId, int productPurchasePrice, int productSellingPrice, String productPurchaseDate, String productSupplierName) {
+    public ProductDetail(String productName, String productId, int productPurchasePrice, int productSellingPrice, String productPurchaseDate, String productSupplierName) {
         this.productName = productName;
         this.productId = productId;
         this.productPurchasePrice = productPurchasePrice;
@@ -23,7 +22,7 @@ public class Product_Detail {
         this.productSupplierName = productSupplierName;
     }
 
-    public Product_Detail(int dbPrimaryID, String productName, String productId, int productPurchasePrice, int productSellingPrice, String productPurchaseDate, String productSupplierName) {
+    public ProductDetail(int dbPrimaryID, String productName, String productId, int productPurchasePrice, int productSellingPrice, String productPurchaseDate, String productSupplierName) {
         this.dbPrimaryID = dbPrimaryID;
         this.productName = productName;
         this.productId = productId;

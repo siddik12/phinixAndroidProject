@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Add_product extends AppCompatActivity {
+public class AddProduct extends AppCompatActivity {
     EditText productNameET, productIdET, puchasePriceET, sellingPriceET, puchaseDateET, supplierNameET;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +26,16 @@ public class Add_product extends AppCompatActivity {
         String productName = productNameET.getText().toString();
         String productId = productIdET.getText().toString();
         int purchasePrice = Integer.parseInt(puchasePriceET.getText().toString());
-        int sellingPrice= Integer.parseInt(sellingPriceET.getText().toString());
+        int sellingPrice = Integer.parseInt(sellingPriceET.getText().toString());
         String puchaseDate = puchaseDateET.getText().toString();
         String supplierName = supplierNameET.getText().toString();
 
         ProductDatabaseHelper productDatabaseHelper = new ProductDatabaseHelper(this);
-        boolean saved = productDatabaseHelper.saveProduct(new Product_Detail(productName,productId,purchasePrice,sellingPrice,puchaseDate,supplierName));
-         if(saved){
-             Toast.makeText(this, "one product add succesfully", Toast.LENGTH_SHORT).show();
-         }
-         else{
-             Toast.makeText(this, "product not saved", Toast.LENGTH_SHORT).show();
-         }
+        boolean saved = productDatabaseHelper.saveProduct(new ProductDetail(productName, productId, purchasePrice, sellingPrice, puchaseDate, supplierName));
+        if (saved) {
+            Toast.makeText(this, "one product add succesfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "product not saved", Toast.LENGTH_SHORT).show();
+        }
     }
 }

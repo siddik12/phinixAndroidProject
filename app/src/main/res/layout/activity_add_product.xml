@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="15dp"
 
-    tools:context="com.phinix.apps.grocerymanagement.Add_product">
+    tools:context="com.phinix.apps.grocerymanagement.AddProduct">
     <TextView
         android:textSize="30sp"
         android:gravity="center"

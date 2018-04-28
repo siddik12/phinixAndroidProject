@@ -28,9 +28,9 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
             PRODUCT_COL_PRIMARY_ID + " INTEGER PRIMARY KEY, " +
             PRODUCT_COL_NAME + " TEXT, " +
             PRODUCT_COL_ID + " TEXT, " +
-            PRODUCT_COL_PURCHASE_PRICE + " INT, "+
-            PRODUCT_COL_SELLING_PRICE + " INT, "+
-            PRODUCT_COL_PURCHASE_DATE + " TEXT, "+
+            PRODUCT_COL_PURCHASE_PRICE + " INT, " +
+            PRODUCT_COL_SELLING_PRICE + " INT, " +
+            PRODUCT_COL_PURCHASE_DATE + " TEXT, " +
             PRODUCT_COL_SUPPLIER_NAME + " TEXT )";
 
     public ProductDatabaseHelper(Context context) {
@@ -48,8 +48,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean saveProduct(Product_Detail product_detail)
-    {
+    public boolean saveProduct(ProductDetail product_detail) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODUCT_COL_NAME, product_detail.getProductName());
@@ -61,25 +60,22 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         long noOfRowsInserted = db.insert(PRODUCT_TABLE_NAME, null, contentValues);
         db.close();
 
-        if (noOfRowsInserted >0)
-        {
+        if (noOfRowsInserted > 0) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
 
     }
 
-    public List<Product_Detail> getAllProducts(){
-        List<Product_Detail> productList = new ArrayList<>();
-        String sql = "Select * from "+PRODUCT_TABLE_NAME;
+    public List<ProductDetail> getAllProducts() {
+        List<ProductDetail> productList = new ArrayList<>();
+        String sql = "Select * from " + PRODUCT_TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql,null);
-        if(cursor.moveToFirst()){
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
             do {
-                Product_Detail product_detail = new Product_Detail();
+                ProductDetail product_detail = new ProductDetail();
                 product_detail.setDbPrimaryID(Integer.parseInt(cursor.getString(0)));
                 product_detail.setProductName(cursor.getString(1));
                 product_detail.setProductId(cursor.getString(2));
@@ -89,14 +85,12 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
                 product_detail.setProductSupplierName(cursor.getString(6));
                 productList.add(product_detail);
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
-
 
 
         return productList;
     }
-
 
 
 //    end class
