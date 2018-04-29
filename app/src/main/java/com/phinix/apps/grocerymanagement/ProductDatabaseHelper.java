@@ -92,6 +92,31 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         return productList;
     }
 
+    //added by Uchchash to get product data from selected raw
+
+    Product setEditableProduct(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        Cursor cursor = db.rawQuery("Select * from  LIST WHERE ID = " + id + "", null);
+
+
+        Product product_detail = new Product();
+        product_detail.setDbPrimaryID(Integer.parseInt(cursor.getString(0)));
+        product_detail.setProductName(cursor.getString(1));
+        product_detail.setProductId(cursor.getString(2));
+        product_detail.setProductPurchasePrice(Integer.parseInt(cursor.getString(3)));
+        product_detail.setProductSellingPrice(Integer.parseInt(cursor.getString(4)));
+        product_detail.setProductPurchaseDate(cursor.getString(5));
+        product_detail.setProductSupplierName(cursor.getString(6));
+
+        db.close();
+
+
+        return product_detail;
+    }
+
 
 //    end class
 }

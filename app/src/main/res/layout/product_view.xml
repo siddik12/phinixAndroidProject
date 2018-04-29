@@ -25,6 +25,20 @@
             android:layout_height="wrap_content"
             tools:text="$200" />
 
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/editProduct"
+                android:src="@android:drawable/ic_menu_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
