@@ -1,5 +1,6 @@
 package com.phinix.apps.grocerymanagement;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,5 +38,15 @@ public class AddProduct extends AppCompatActivity {
         } else {
             Toast.makeText(this, "product_view not saved", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(AddProduct.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
