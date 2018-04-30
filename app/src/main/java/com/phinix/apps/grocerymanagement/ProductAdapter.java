@@ -40,6 +40,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         final Product product = filteredList.get(position);
         holder.name.setText(product.getProductName());
         holder.price.setText(String.valueOf(product.getProductPurchasePrice()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("id",product.getProductId());
+                intent.putExtra("name",product.getProductName());
+                intent.putExtra("price",product.getProductPurchasePrice());
+                intent.putExtra("sell",product.getProductSellingPrice());
+                intent.putExtra("date",product.getProductPurchaseDate());
+                intent.putExtra("supplier",product.getProductSupplierName());
+                context.startActivity(intent);
+            }
+        });
+
         holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
