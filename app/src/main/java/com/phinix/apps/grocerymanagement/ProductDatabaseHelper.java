@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean saveProduct(Product product_detail) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODUCT_COL_NAME, product_detail.getProductName());
         contentValues.put(PRODUCT_COL_ID, product_detail.getProductId());
@@ -94,28 +95,69 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
 
     //added by Uchchash to get product data from selected raw
 
-    Product setEditableProduct(int id) {
+    Product getProduct(int primary_id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
 
-        Cursor cursor = db.rawQuery("Select * from  LIST WHERE ID = " + id + "", null);
+        //Cursor cursor = db.rawQuery("Select * from "+ PRODUCT_TABLE_NAME+" WHERE "+PRODUCT_COL_PRIMARY_ID+" = " + id + "", null);
+
+        Cursor cursor = db.query(PRODUCT_TABLE_NAME,null,PRODUCT_COL_PRIMARY_ID +" =?", new String[]{String.valueOf(primary_id)},null,null,null);
 
 
         Product product_detail = new Product();
-        product_detail.setDbPrimaryID(Integer.parseInt(cursor.getString(0)));
-        product_detail.setProductName(cursor.getString(1));
-        product_detail.setProductId(cursor.getString(2));
-        product_detail.setProductPurchasePrice(Integer.parseInt(cursor.getString(3)));
-        product_detail.setProductSellingPrice(Integer.parseInt(cursor.getString(4)));
-        product_detail.setProductPurchaseDate(cursor.getString(5));
-        product_detail.setProductSupplierName(cursor.getString(6));
 
+        if(cursor.getCount() > 0 ){
+            cursor.moveToFirst();
+            product_detail.setDbPrimaryID(Integer.parseInt(cursor.getString(0)));
+            product_detail.setProductName(cursor.getString(1));
+            product_detail.setProductId(cursor.getString(2));
+            product_detail.setProductPurchasePrice(Integer.parseInt(cursor.getString(3)));
+            product_detail.setProductSellingPrice(Integer.parseInt(cursor.getString(4)));
+            product_detail.setProductPurchaseDate(cursor.getString(5));
+            product_detail.setProductSupplierName(cursor.getString(6));
+        }
+
+        cursor.close();
         db.close();
 
 
         return product_detail;
     }
+
+
+
+    // Updating Product
+    public int updateProduct(Product product) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PRODUCT_COL_NAME, product.getProductName());
+        contentValues.put(PRODUCT_COL_ID, product.getProductId());
+        contentValues.put(PRODUCT_COL_PURCHASE_PRICE, product.getProductPurchasePrice());
+        contentValues.put(PRODUCT_COL_SELLING_PRICE, product.getProductSellingPrice());
+        contentValues.put(PRODUCT_COL_PURCHASE_DATE, product.getProductPurchaseDate());
+        contentValues.put(PRODUCT_COL_SUPPLIER_NAME, product.getProductSupplierName());
+
+        Log.d("ID", String.valueOf(product.getDbPrimaryID()));
+
+        // updating row
+       int id = db.update(PRODUCT_TABLE_NAME, contentValues,
+                PRODUCT_COL_PRIMARY_ID + "=?",new String[] { String.valueOf(product.getDbPrimaryID())});
+
+       db.close();
+
+       return id;
+    }
+
+
+    public void deleteProduct(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(PRODUCT_TABLE_NAME,PRODUCT_COL_PRIMARY_ID +"="+id,null);
+        db.close();
+    }
+
 
 
 //    end class

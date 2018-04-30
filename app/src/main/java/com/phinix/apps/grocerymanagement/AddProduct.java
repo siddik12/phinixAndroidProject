@@ -35,6 +35,9 @@ public class AddProduct extends AppCompatActivity {
         boolean saved = productDatabaseHelper.saveProduct(new Product(productName, productId, purchasePrice, sellingPrice, puchaseDate, supplierName));
         if (saved) {
             Toast.makeText(this, "one product_view add successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AddProduct.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, "product_view not saved", Toast.LENGTH_SHORT).show();
         }
@@ -42,11 +45,5 @@ public class AddProduct extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(AddProduct.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

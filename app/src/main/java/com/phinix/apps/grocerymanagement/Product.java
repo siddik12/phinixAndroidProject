@@ -87,4 +87,17 @@ public class Product {
     public void setProductSupplierName(String productSupplierName) {
         this.productSupplierName = productSupplierName;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "dbPrimaryID=" + dbPrimaryID +
+                ", productName='" + productName + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productPurchasePrice=" + productPurchasePrice +
+                ", productSellingPrice=" + productSellingPrice +
+                ", productPurchaseDate='" + productPurchaseDate + '\'' +
+                ", productSupplierName='" + productSupplierName + '\'' +
+                '}';
+    }
 }
